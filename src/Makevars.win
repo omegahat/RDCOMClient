@@ -1,0 +1,18 @@
+ifndef RHOME
+ RHOME=d:/duncan/Projects/R/R-check
+endif
+
+-include local.config
+ifndef RDCOMSERVER_SRC
+ RDCOMSERVER_SRC=.
+endif
+
+DEFS=RDCOMClient.def
+PKG_CPPFLAGS=-D_GNU_ -DNO_PYCOM_IPROVIDECLASSINFO -I$(RDCOMSERVER_SRC)
+PKG_CXXFLAGS=-Wno-deprecated 
+PKG_LIBS= -lole32 -loleaut32 -luuid
+
+#OBJS=connect.o $(RDCOMSERVER_SRC)/RUtils.o $(RDCOMSERVER_SRC)/converters.o $(RDCOMSERVER_SRC)/COMError.o
+
+
+#connect.o: connect.cpp StdAfx.h

@@ -1,0 +1,32 @@
+exportClasses(COMIDispatch, IUnknown, COMList, COMTypedList)
+exportClasses(CompiledCOMIDispatch, COMTypedNamedList, COMTypedParameterizedNamedList, CompiledCOMCoClass) 
+
+export(COMNames)
+
+exportClasses(EnumValue)
+export(EnumValue)
+
+#IConnectionPoint,
+
+exportClasses(COMDate, COMCurrency, COMDecimal,
+              VARIANT, CurrencyVARIANT, DateVARIANT)
+exportClasses(HResult, SCOMErrorInfo)
+
+
+export(.COMInit)
+
+export(.COM, COMCreate, DispatchMethods, COMList, getCOMInstance)
+export(asCOMArray, createCOMReference)
+export(COMStop)
+
+export(getCLSID)
+
+
+exportMethods("$", "$<-", "[[", "[[<-", "length", "lapply", "sapply", "show", "names")
+
+export(createTypeVarName)
+exportMethods(createTypeVarName)
+
+export(getCOMElements)
+
+export(isValidCOMObject)
