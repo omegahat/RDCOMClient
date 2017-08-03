@@ -13,7 +13,7 @@ RDCOM_setWriteError(SEXP value)
 {
     int tmp = RDCOM_WriteErrors;
     RDCOM_WriteErrors = asLogical(value);
-    return(ScalarInteger(tmp));
+    return(ScalarLogical(tmp));
 }
 
 extern "C"

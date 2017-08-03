@@ -12,7 +12,7 @@ writeErrors =
 function(val = logical())
 {
     if(length(val))
-        .Call("RDCOM_setWriteErrors", as.logical(val))
+        .Call("RDCOM_setWriteError", as.logical(val), PACKAGE = "RDCOMClient")
     else
-        .Call("RDCOM_getWriteErrors")
+        .Call("RDCOM_getWriteError", PACKAGE = "RDCOMClient")
 }
