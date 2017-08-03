@@ -5,6 +5,23 @@
 
 #include <tchar.h>
 
+extern "C" int RDCOM_WriteErrors = 1;
+
+extern "C"
+SEXP
+RDCOM_setWriteError(SEXP value)
+{
+    int tmp = RDCOM_WriteErrors;
+    RDCOM_WriteErrors = asLogical(value);
+    return(ScalarInteger(tmp));
+}
+
+extern "C"
+SEXP
+RDCOM_getWriteError(SEXP value)
+{
+    return(ScalarLogical(RDCOM_WriteErrors));
+}
 
 FILE *
 getErrorFILE()

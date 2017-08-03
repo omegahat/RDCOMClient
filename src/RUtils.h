@@ -53,12 +53,16 @@ extern "C" {
 
   void R_typelib_finalizer(SEXP obj);
 
+
+ extern int RDCOM_WriteErrors;
+
 #ifdef __cplusplus
 }
 #endif
 
 
-#define errorLog(a,...) fprintf(getErrorFILE(), a, ##__VA_ARGS__); fflush(getErrorFILE());
+
+#define errorLog(a,...) if(RDCOM_WriteErrors) { fprintf(getErrorFILE(), a, ##__VA_ARGS__); fflush(getErrorFILE()); }
 
 
 
