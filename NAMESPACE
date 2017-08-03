@@ -30,3 +30,6 @@ exportMethods(createTypeVarName)
 export(getCOMElements)
 
 export(isValidCOMObject)
+
+
+export(writeErrors)
