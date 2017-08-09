@@ -46,7 +46,7 @@ Class \code{"numeric"}, by class \code{"integer"}.
   }
 }
 
-\author{Duncan Temple Lang (duncan@wald.ucdavis.edu)}
+\author{Duncan Temple Lang (duncan@r-project.org)}
 
 \seealso{
  \code{\link{EnumValue}}

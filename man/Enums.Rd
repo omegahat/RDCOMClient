@@ -20,10 +20,10 @@ or both.
 \source{
 }
 \references{
-\url{http://www.omegahat.org/RDCOMClient}
-\url{http://www.omegahat.org/RDCOMServer}
-\url{http://www.omegahat.org/SWinTypeLibs}
-\url{http://www.omegahat.org/SWinRegistry}
+\url{http://www.omegahat.net/RDCOMClient}
+\url{http://www.omegahat.net/RDCOMServer}
+\url{http://www.omegahat.net/SWinTypeLibs}
+\url{http://www.omegahat.net/SWinRegistry}
 }
 
 \examples{

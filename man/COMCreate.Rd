@@ -54,12 +54,12 @@ getCOMInstance(guid, force = TRUE, silent = FALSE)
   As a result, it will create a new instance of the application.
 }
 \references{
-\url{http://www.omegahat.org/RDCOMClient}
-\url{http://www.omegahat.org/RDCOMServer}
-\url{http://www.omegahat.org/SWinTypeLibs}
-\url{http://www.omegahat.org/SWinRegistry}
+\url{http://www.omegahat.net/RDCOMClient}
+\url{http://www.omegahat.net/RDCOMServer}
+\url{http://www.omegahat.net/SWinTypeLibs}
+\url{http://www.omegahat.net/SWinRegistry}
 }
-\author{Duncan Temple Lang (duncan@wald.ucdavis.edu)}
+\author{Duncan Temple Lang (duncan@r-project.org)}
 
 \seealso{
  The \code{$} and \code{[[} operators

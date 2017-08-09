@@ -37,10 +37,10 @@ COMStop(msg, status, class)
  An error object of the class specified by \code{class}.
 }
 \references{
-  http://www.omegahat.org/RDCOMServer
-  http://www.omegahat.org/RDCOMClient
+  http://www.omegahat.net/RDCOMServer
+  http://www.omegahat.net/RDCOMClient
 }
-\author{Duncan Temple Lang <duncan@wald.ucdavis.edu>}
+\author{Duncan Temple Lang <duncan@r-project.org>}
 
 \seealso{
  \code{\link[RDCOMClient]{.COM}}

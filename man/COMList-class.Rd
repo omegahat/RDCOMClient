@@ -91,9 +91,9 @@ Class \code{"IUnknown"}, by class \code{"COMIDispatch"}.
 }
 \references{
   Excel types.
-  \url{http://www.omegahat.org/RDCOMClient}
+  \url{http://www.omegahat.net/RDCOMClient}
 }
-\author{Duncan Temple Lang <duncan@wald.ucdavis.edu>}
+\author{Duncan Temple Lang <duncan@r-project.org>}
 
 
 \seealso{

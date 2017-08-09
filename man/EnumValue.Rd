@@ -31,7 +31,7 @@ EnumValue(id, value, obj = new("EnumValue"))
  filled in with a named integer vector of length 1.
 }
 
-\author{Duncan Temple Lang (duncan@wald.ucdavis.edu)}
+\author{Duncan Temple Lang (duncan@r-project.org)}
 
 \seealso{
  \code{\link{EnumValue-class}}
