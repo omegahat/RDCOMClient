@@ -20,13 +20,12 @@ With Rtools installed, one can build the package from source without the need fo
 any third-party libraries.
 
 From the (Windows) command line
-```
-R CMD INSTALL RDCOMClient
-```
+
+```R CMD INSTALL RDCOMClient```
+
 or using devtools
-```
-devtools::install_github("omegahat/RDCOMClient")
-```
+
+```devtools::install_github("omegahat/RDCOMClient")```
 
 ## Documentation
 
