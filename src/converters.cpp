@@ -855,6 +855,7 @@ R_create2DArray(SEXP obj)
   return(ans);
 }
 
+extern "C"
 SEXP
 R_createVariant(SEXP type)
 {
