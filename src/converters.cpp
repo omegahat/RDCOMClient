@@ -145,7 +145,8 @@ getArray(SAFEARRAY *arr, int dimNo, int numDims, long *indices)
       case LGLSXP:
       case REALSXP:
       case STRSXP:
-	ans = UnList(ans);
+	// ans = UnList(ans);
+	ans = ans;
 	break;
     }
   }
