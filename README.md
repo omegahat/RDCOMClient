@@ -20,7 +20,7 @@ Run the following to install from this repository:
 
 ```r
 library(devtools)
-devtools::install_github('Caliper-Corporation/RDCOMClient')
+devtools::install_github('CaliperStaff/RDCOMClient')
 ```
 
 ## Documentation
