@@ -16,11 +16,25 @@ CRAN, but can be installed as shown below.
 
 ## Install
 
-Run the following to install from this repository:
+### For R 3.6.x
 
 ```r
 library(devtools)
-devtools::install_github('CaliperStaff/RDCOMClient')
+devtools::install_github('dkyleward/RDCOMClient')
+```
+
+### For R 4.0
+
+Until this package is updated for R 4.0, installing directly from GitHub will
+not work. Instead, use the code snippet below to install from a binary version
+already compiled:
+
+```r
+dir <- tempdir()
+zip <- file.path(dir, "RDCOMClient.zip")
+url <- "https://github.com/dkyleward/RDCOMClient/releases/download/v0.94/RDCOMClient_binary.zip"
+download.file(url, zip)
+install.packages(zip, repos = NULL, type = "win.binary")
 ```
 
 ## Documentation
