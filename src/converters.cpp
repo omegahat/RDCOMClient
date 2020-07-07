@@ -139,16 +139,7 @@ getArray(SAFEARRAY *arr, int dimNo, int numDims, long *indices)
     }
     SET_VECTOR_ELT(ans, i, el);
   }
-  if(numDims == 1 && rtype != -1) {
-    switch(rtype) {
-      case INTSXP:
-      case LGLSXP:
-      case REALSXP:
-      case STRSXP:
-	ans = UnList(ans);
-	break;
-    }
-  }
+
   UNPROTECT(1);
 
   return(ans);
