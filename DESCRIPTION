@@ -1,5 +1,5 @@
 Package: RDCOMClient
-Version: 0.94-0
+Version: 0.95-0
 Title: R-DCOM client
 Author:  Duncan Temple Lang <duncan@r-project.org>
 Maintainer: Duncan Temple Lang <duncan@r-project.org>
