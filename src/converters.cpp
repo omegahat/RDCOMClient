@@ -362,7 +362,6 @@ SEXP
 R_convertDCOMObjectToR(VARIANT *var)
 {
   SEXP ans = R_NilValue;
-  HRESULT hr;
 
   VARTYPE type = V_VT(var);
 
@@ -438,7 +437,7 @@ R_convertDCOMObjectToR(VARIANT *var)
     case VT_UI2:
     case VT_UI4:
     case VT_UINT:
-      hr = VariantChangeType(var, var, 0, VT_I4);
+      VariantChangeType(var, var, 0, VT_I4);
       ans = R_scalarReal((double) V_I4(var));
       break;
 
@@ -446,14 +445,14 @@ R_convertDCOMObjectToR(VARIANT *var)
     case VT_I2:
     case VT_I4:
     case VT_INT:
-      hr = VariantChangeType(var, var, 0, VT_I4);
+      VariantChangeType(var, var, 0, VT_I4);
       ans = R_scalarInteger(V_I4(var));
       break;
 
     case VT_R4:
     case VT_R8:
     case VT_I8:
-      hr = VariantChangeType(var, var, 0, VT_R8);
+      VariantChangeType(var, var, 0, VT_R8);
       ans = R_scalarReal(V_R8(var));
       break;
 
@@ -461,7 +460,7 @@ R_convertDCOMObjectToR(VARIANT *var)
     case VT_DATE:
     case VT_HRESULT:
     case VT_DECIMAL:
-      hr = VariantChangeType(var, var, 0, VT_R8);
+      VariantChangeType(var, var, 0, VT_R8);
       ans = numberFromVariant(var, type);
       break;
 

@@ -87,7 +87,7 @@ class RCOMObject : public IDispatch
                           if(def != R_NilValue)
                              setObject(def);
                        };
-  ~RCOMObject() {
+  virtual ~RCOMObject() {
                   m_cRef--;
                   if(m_cRef == 0) {
 		    destroy();

@@ -402,7 +402,6 @@ SEXP getArray(SAFEARRAY *arr, int dimNo, int numDims, long *indices);
 HRESULT
 R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *namedArgPositions)
 {
- HRESULT hr;
  int numArgs = Rf_length(args), i, ctr;
  if(numArgs == 0)
    return(S_OK);
@@ -441,7 +440,7 @@ R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *n
      }
      el = VECTOR_ELT(args, i);
      VariantInit(var);
-     hr = R_convertRObjectToDCOM(el, var);
+     R_convertRObjectToDCOM(el, var);
    }
  } else {
 
@@ -451,7 +450,7 @@ R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *n
    for(i = 0, ctr = numArgs-1; i < numArgs; i++, ctr--) {
      SEXP el = VECTOR_ELT(args, i);
      VariantInit(&parms->rgvarg[ctr]);
-     hr = R_convertRObjectToDCOM(el, &(parms->rgvarg[ctr]));
+     R_convertRObjectToDCOM(el, &(parms->rgvarg[ctr]));
    }
  }
 
