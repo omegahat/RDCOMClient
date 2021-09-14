@@ -23,16 +23,31 @@ RDCOM_getWriteError(SEXP value)
     return(ScalarLogical(RDCOM_WriteErrors));
 }
 
+
+
 FILE *
 getErrorFILE()
 {
   static FILE *f = NULL;
-  if(!f) {
-    f = fopen("C:\\RDCOM.err", "a");
-    if(!f) {
-      f = fopen("C:\\RDCOM_server.err", "a");
+
+  if (f)
+    return f;
+
+  TCHAR path[MAX_PATH];
+  DWORD result;
+
+  result = GetTempPath(MAX_PATH, path);
+
+  if (result > MAX_PATH-10 || result == 0) {
+    f = stderr;
+  } else {
+    lstrcat(path, _T("RDCOM.err"));
+    f = fopen(path, "a");
+    if (!f) {
+      f = stderr;
     }
   }
+
   return(f);
 }
 
