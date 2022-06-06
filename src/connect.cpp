@@ -27,6 +27,8 @@ extern "C" {
 #include "converters.h"
 
 
+
+
 #ifdef _GNU_
 #include "RUtils.h"
 #define R_logicalScalarValue(x, i) LOGICAL((x))[(i)]

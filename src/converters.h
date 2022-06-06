@@ -12,3 +12,5 @@ extern "C" {
   SEXP R_setVariant(SEXP svar, SEXP value, SEXP type);
 }
 
+
+#include "RErrorHandler.h"
