@@ -251,6 +251,12 @@ freeSysStrings(BSTR *els, int num)
 }
 
 
+/*
+  Given a COMIDispatch object and a function/property name,
+  see if it is propertyget and not a propertyput method.
+  If so, then it is readonly and we don't want obj[[ propName ]] <- to assign
+  as it will give an error.
+ */
 extern "C" SEXP
 R_isReadOnly(SEXP obj, SEXP propName)
 {
@@ -262,12 +268,9 @@ R_isReadOnly(SEXP obj, SEXP propName)
   UINT ninfo = 0;
   disp->GetTypeInfoCount(&ninfo);
 
-  //  errorLog("Checking if read only.  typeInfoCount %d, methodIDs[0] = %ld\n", ninfo, methodIds[0]);   
-
 
    disp->GetTypeInfo(0, 0, &type); // 0 is for locale. Set properly in SWinTypesLib
 
-   //   errorLog("Checking if read only.  type %d\n", type != NULL);
    if(type) {
      FUNCDESC *desc = NULL;
 
@@ -276,6 +279,14 @@ R_isReadOnly(SEXP obj, SEXP propName)
      comNames[0] = AsBstr(CHAR(STRING_ELT(propName, 0)));
      
      hr = disp->GetIDsOfNames(IID_NULL, comNames, 1, LOCALE_USER_DEFAULT, methodIds);
+     freeSysStrings(comNames, 1);
+
+     if(hr != S_OK) {
+       PROBLEM "failed"
+	 ERROR;
+     }
+     
+     
      type->GetFuncDesc(methodIds[0], &desc);
      if(desc) {
        errorLog("FUNCDESC %d\n", desc->invkind);
