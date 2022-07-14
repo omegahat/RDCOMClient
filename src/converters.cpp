@@ -362,7 +362,7 @@ SEXP
 R_convertDCOMObjectToR(VARIANT *var)
 {
   SEXP ans = R_NilValue;
-  HRESULT hr;
+  HRESULT hr = S_OK;
 
   VARTYPE type = V_VT(var);
 
@@ -446,7 +446,7 @@ R_convertDCOMObjectToR(VARIANT *var)
     case VT_I2:
     case VT_I4:
     case VT_INT:
-      hr = VariantChangeType(var, var, 0, VT_I4);
+      hr =  VariantChangeType(var, var, 0, VT_I4);
       ans = R_scalarInteger(V_I4(var));
       break;
 
@@ -503,9 +503,19 @@ R_convertDCOMObjectToR(VARIANT *var)
   case VT_CARRAY:
   case VT_USERDEFINED:
   default:
+    //XXXX 
     fprintf(stderr, "Unhandled conversion type %d\n", V_VT(var));fflush(stderr);
     //XXX this consumes the variant. So the variant clearance in Invoke() does it again!
     ans = createRVariantObject(var, V_VT(var));
+  }
+
+  if(hr != S_OK) {
+    char errBuf[1000];
+    FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, hr, // GetLastError(), 
+		  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), 
+		  errBuf, sizeof(errBuf)/sizeof(errBuf[0]), NULL);
+    PROBLEM "problem in conversion (%ld) %s", hr, errBuf
+      ERROR;
   }
 
 #if defined(RDCOM_VERBOSE) && RDCOM_VERBOSE
