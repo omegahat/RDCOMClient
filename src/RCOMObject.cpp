@@ -8,7 +8,7 @@ extern "C" {
 }
 
 bool isCOMError(SEXP obj);
-bool isClass(SEXP obj, char *name);
+bool isClass(SEXP obj, const char *name);
 HRESULT processCOMError(SEXP obj, EXCEPINFO *excep, UINT *argNum);
 static SEXP callQueryInterfaceMethod(SEXP obj, char *guid);
 
@@ -118,10 +118,10 @@ callQueryInterfaceMethod(SEXP obj, char *guid)
 HRESULT __stdcall
 RCOMEnvironmentObject::GetIDsOfNames(REFIID refId, LPOLESTR *name, UINT cNames, LCID local, DISPID *id)
 {
-  SEXP sid;
-  int i, n;
+  // uiused SEXP sid;
+  //unused  int i, n;
   SEXP names;
-  char str[90];
+  // unused char str[90];
   HRESULT hr;
 
 #ifdef RDCOM_VERBOSE
@@ -169,7 +169,7 @@ RCOMObject::lookupRName(SEXP names, const char * const str, DISPID *id)
   if(i == n) {
     errorLog("Couldn't find method %s\n", str);
   } else {
-    errorLog("Method id for %s = %d\n", str,  *id);
+    errorLog("Method id for %s = %ld\n", str,  *id);
   }
 #endif
 
@@ -183,7 +183,7 @@ RCOMEnvironmentObject::Invoke(DISPID id, REFIID refId, LCID locale, WORD method,
  SEXP func;
 
 #ifdef RDCOM_VERBOSE
- errorLog("Method id %d, method = %s",  id, method);
+ errorLog("Method id %ld, method = %d",  id, method); // WORD seems to be int
 #endif
  func = VECTOR_ELT(this->obj, id);
 
@@ -294,7 +294,7 @@ SEXP
 asRStringVector(LPOLESTR *name, UINT cNames)
 {
   SEXP tmp;
-  int i;
+  UINT i;
   char str[1000];
   PROTECT(tmp = allocVector(STRSXP, cNames));
   for(i = 0; i < cNames; i++) {
@@ -309,8 +309,9 @@ asRStringVector(LPOLESTR *name, UINT cNames)
 HRESULT __stdcall
 RCOMSObject::GetIDsOfNames(REFIID refId, LPOLESTR *name, UINT cNames, LCID locale, DISPID *id)
 {
-  SEXP e, val, tmp;
-  int errorOccurred, i;
+  SEXP e, val; // unused tmp;
+  int errorOccurred;
+  UINT i;
 
   PROTECT(e = allocVector(LANGSXP, 2));
   SETCAR(e, VECTOR_ELT(this->obj, IDS_OF_NAMES));
@@ -353,7 +354,8 @@ HRESULT __stdcall
 RCOMSObject::Invoke(DISPID id, REFIID refId, LCID locale, WORD method, DISPPARAMS *parms, 
 				     VARIANT *var, EXCEPINFO *excep, UINT *argNumErr)
 {
-  int errorOccurred, i;
+  int errorOccurred;
+  UINT i;
   SEXP e, ptr, val, tmp;
   HRESULT hr;
 
@@ -417,6 +419,12 @@ RCOMSObject::Invoke(DISPID id, REFIID refId, LCID locale, WORD method, DISPPARAM
   }
   
   hr = convertToCOM(val, var);
+  if(hr != S_OK) {
+    // what to do here ??
+    PROBLEM "calling covertToCOM was not successful: %ld", hr
+      WARN;
+  }
+  
   UNPROTECT(2);
 
   return(S_OK);
@@ -442,7 +450,7 @@ isCOMError(SEXP obj)
 }
 
 bool
-isClass(SEXP obj, char *name)
+isClass(SEXP obj, const char *name)
 {
  SEXP klass;
  klass = GET_CLASS(obj);
