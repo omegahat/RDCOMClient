@@ -259,7 +259,6 @@ R_lookupPropName(SEXP obj, SEXP propName)
   HRESULT hr = S_OK;
   IDispatch *disp = (IDispatch *) getRDCOMReference(obj);
 
-
   DISPID methodIds[1];
   BSTR comNames[1];
   comNames[0] = AsBstr(CHAR(STRING_ELT(propName, 0)));
@@ -267,19 +266,10 @@ R_lookupPropName(SEXP obj, SEXP propName)
   hr = disp->GetIDsOfNames(IID_NULL, comNames, 1, LOCALE_USER_DEFAULT, methodIds);
   freeSysStrings(comNames, 1);
 
-  if(FAILED(hr)) {
-    return(ScalarLogical(R_NaInt));
-    /*
-       char errBuf[1000];
-	 FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, hr,
-		       MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), 
-		       errBuf, sizeof(errBuf)/sizeof(errBuf[0]), NULL);
-	 PROBLEM "failed to find ID of %s  (%ld) %s", CHAR(STRING_ELT(propName, 0)), hr, errBuf
-	 ERROR;
-    */
-  }
+  if(FAILED(hr)) 
+    return(ScalarReal(R_NaReal));
 
-  return(ScalarInteger(methodIds[0]));
+  return(ScalarReal(methodIds[0]));
 }
 
 /*
@@ -304,7 +294,7 @@ R_isReadOnly(SEXP obj, SEXP propId)
   if(type) {
      FUNCDESC *desc = NULL;
      
-     type->GetFuncDesc(INTEGER(propId)[0], &desc); //XXX do we need this to be a NUMERIC for very large IDs.
+     type->GetFuncDesc(REAL(propId)[0], &desc); 
      if(desc) {
        errorLog("FUNCDESC %d\n", desc->invkind);
        readOnly = (desc->invkind == INVOKE_PROPERTYGET);

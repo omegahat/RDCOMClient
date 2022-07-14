@@ -150,8 +150,7 @@ setMethod("[[<-", c("COMIDispatch", "character", "missing"),
 	             class = c("InvalidPropertyName", "DCOMError", "error", "condition")))
             }
             if(!.Call("R_isReadOnly", x, id, PACKAGE = "RDCOMClient"))
-	       #XXX  pass the id now that we have found it.
-                    .Call("R_setProperty", x, as.character(i), list(value), integer(0), PACKAGE = "RDCOMClient")
+               .Call("R_setProperty", x, as.character(i), list(value), id, PACKAGE = "RDCOMClient")
        }
 	      x 
   	    })
