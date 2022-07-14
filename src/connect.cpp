@@ -400,6 +400,18 @@ R_setProperty(SEXP obj, SEXP propertyName, SEXP value, SEXP ids)
 
 SEXP getArray(SAFEARRAY *arr, int dimNo, int numDims, long *indices);
 
+void
+CHECK_HRESULT(HRESULT hr)
+{
+  if(hr != S_OK) {
+    char errBuf[1000];
+    FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, hr, // GetLastError(), 
+		  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), 
+		  errBuf, sizeof(errBuf)/sizeof(errBuf[0]), NULL);
+    PROBLEM "problem in conversion (%ld) %s", hr, errBuf
+      ERROR;
+  }
+}
 
 HRESULT
 R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *namedArgPositions)
@@ -444,6 +456,7 @@ R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *n
      el = VECTOR_ELT(args, i);
      VariantInit(var);
      hr = R_convertRObjectToDCOM(el, var);
+     CHECK_HRESULT(hr);     
    }
  } else {
 
@@ -454,6 +467,7 @@ R_getCOMArgs(SEXP args, DISPPARAMS *parms, DISPID *ids, int numNamedArgs, int *n
      SEXP el = VECTOR_ELT(args, i);
      VariantInit(&parms->rgvarg[ctr]);
      hr = R_convertRObjectToDCOM(el, &(parms->rgvarg[ctr]));
+     CHECK_HRESULT(hr);
    }
  }
 
