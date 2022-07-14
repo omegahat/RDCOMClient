@@ -5,7 +5,8 @@
 
 #include <tchar.h>
 
-extern "C" int RDCOM_WriteErrors = 1;
+//extern "C"
+int RDCOM_WriteErrors = 1;
 
 extern "C"
 SEXP
@@ -361,7 +362,10 @@ SEXP R_createCOMErrorCodes();
 
 
 
+#ifndef _countof
 #define _countof(array) (sizeof(array)/sizeof(array[0]))
+#endif
+
 void GetScodeString(HRESULT hr, LPTSTR buf, int bufSize)
 {
 	// first ask the OS to give it to us..
@@ -385,7 +389,7 @@ void GetScodeString(HRESULT hr, LPTSTR buf, int bufSize)
 		}
 	}
 	// not found - make one up
-	sprintf(buf, ("OLE error 0x%08x"), hr);
+	sprintf(buf, ("OLE error 0x%ld"), hr);
 }
 
 
@@ -423,7 +427,8 @@ checkErrorInfo(IUnknown *obj, HRESULT status, SEXP *serr)
   HRESULT hr;
   ISupportErrorInfo *info;
 
-  fprintf(stderr, "<checkErrorInfo> %X \n", status);
+  // XXX DON'T print like this
+  fprintf(stderr, "<checkErrorInfo> %ld \n", status);
 
   if(serr) 
     *serr = NULL;
