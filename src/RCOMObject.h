@@ -58,7 +58,8 @@ class RCOMObject : public IDispatch
     virtual HRESULT __stdcall QueryInterface(const IID& iid, void** ppv);
     virtual ULONG __stdcall AddRef() {return InterlockedIncrement(&m_cRef);}
     virtual ULONG __stdcall Release() { if(InterlockedDecrement(&m_cRef) == 0) {
-                                          delete this;
+	// XXX  Compiler warning: deleting object of abstract class type 'RCOMObject' which has non-virtual destructor will cause undefined behavior
+	// delete this;
 					  return 0;
                                         }
                                         return m_cRef;
