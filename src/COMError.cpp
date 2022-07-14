@@ -6,7 +6,7 @@
 #include <tchar.h>
 
 //extern "C"
-int RDCOM_WriteErrors = 1;
+int RDCOM_WriteErrors = 0;
 
 extern "C"
 SEXP
