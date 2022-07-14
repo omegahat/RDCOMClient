@@ -134,18 +134,23 @@ setMethod("[[<-", c("COMIDispatch", "character", "character"),
 
 setMethod("[[<-", c("COMIDispatch", "character", "missing"),
 	    function(x, i, j, ..., value) {
-if(length(i) > 1) {
-  tmp = x
-  for(id in i[-length(i)])
-     tmp = tmp[[ id ]]
-  .Call("R_setProperty", tmp, as.character(i[length(i)]), list(value), integer(0), PACKAGE = "RDCOMClient")
-} else
-              .Call("R_setProperty", x, as.character(i), list(value), integer(0), PACKAGE = "RDCOMClient")
+
+
+	    if(length(i) > 1) {
+	      tmp = x
+	        for(id in i[-length(i)])
+		     tmp = tmp[[ id ]]
+		       .Call("R_setProperty", tmp, as.character(i[length(i)]), list(value), integer(0), PACKAGE = "RDCOMClient")
+	    } else {
+                 if(!.Call("R_isReadOnly", x, as.character(i), PACKAGE = "RDCOMClient"))
+                    .Call("R_setProperty", x, as.character(i), list(value), integer(0), PACKAGE = "RDCOMClient")
+       }
 	      x 
   	    })
 
 setMethod("[[<-", c("COMIDispatch", "numeric"),
 	    function(x, i, j, ..., value) {
+	      warning("x[[ number ]] <- value doesn't change anything in a COMIDispatch object")
 	      x 
   	    })
 

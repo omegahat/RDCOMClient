@@ -251,6 +251,43 @@ freeSysStrings(BSTR *els, int num)
 }
 
 
+extern "C" SEXP
+R_isReadOnly(SEXP obj, SEXP propName)
+{
+  int readOnly = 0;
+  HRESULT hr = S_OK;
+  IDispatch *disp = (IDispatch *) getRDCOMReference(obj);
+  ITypeInfo *type = NULL;
+
+  UINT ninfo = 0;
+  disp->GetTypeInfoCount(&ninfo);
+
+  //  errorLog("Checking if read only.  typeInfoCount %d, methodIDs[0] = %ld\n", ninfo, methodIds[0]);   
+
+
+   disp->GetTypeInfo(0, 0, &type); // 0 is for locale. Set properly in SWinTypesLib
+
+   //   errorLog("Checking if read only.  type %d\n", type != NULL);
+   if(type) {
+     FUNCDESC *desc = NULL;
+
+     DISPID methodIds[1];
+     BSTR comNames[1];
+     comNames[0] = AsBstr(CHAR(STRING_ELT(propName, 0)));
+     
+     hr = disp->GetIDsOfNames(IID_NULL, comNames, 1, LOCALE_USER_DEFAULT, methodIds);
+     type->GetFuncDesc(methodIds[0], &desc);
+     if(desc) {
+       errorLog("FUNCDESC %d\n", desc->invkind);
+       readOnly = (desc->invkind == INVOKE_PROPERTYGET);
+     }
+     errorLog("readOnly.   %d\n", readOnly);
+   }
+
+   return(ScalarLogical(readOnly));
+}
+
+
 /* 
  The real invoke mechanism that handles all the details.
 */
@@ -352,17 +389,18 @@ R_COM_Invoke(SEXP obj, SEXP methodName, SEXP args, WORD callType, WORD doReturn,
 
  hr = disp->Invoke(methodIds[0], IID_NULL, LOCALE_USER_DEFAULT, callType, &params, res, &exceptionInfo, &nargErr);
  if(FAILED(hr)) {
-   if(hr == DISP_E_MEMBERNOTFOUND) {
-     errorLog("Error because member not found %d\n", nargErr);
-   }
+   
+     if(hr == DISP_E_MEMBERNOTFOUND) {
+       errorLog("Error because member not found %d\n", nargErr);
+     }
 
 #ifdef RDCOM_VERBOSE
    errorLog("Error (%d): <in argument %d>, call type = %d, call = \n",  
 	   (int) hr, (int)nargErr, (int) callType, pmname);
 #endif
 
-    clearVariants(&params);
-    freeSysStrings(comNames, numNames);
+     clearVariants(&params);
+      freeSysStrings(comNames, numNames);
 
     if(checkErrorInfo(disp, hr, NULL) != S_OK) {
  fprintf(stderr, "checkErrorInfo %d\n", (int) hr);fflush(stderr);
