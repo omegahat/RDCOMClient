@@ -1,4 +1,3 @@
-library(methods)
 
 setClass("SCOMErrorInfo", representation(status="numeric",
                                          source="character",
