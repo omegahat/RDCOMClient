@@ -251,43 +251,60 @@ freeSysStrings(BSTR *els, int num)
 }
 
 
+
+extern "C"
+SEXP
+R_lookupPropName(SEXP obj, SEXP propName)
+{
+  HRESULT hr = S_OK;
+  IDispatch *disp = (IDispatch *) getRDCOMReference(obj);
+
+
+  DISPID methodIds[1];
+  BSTR comNames[1];
+  comNames[0] = AsBstr(CHAR(STRING_ELT(propName, 0)));
+     
+  hr = disp->GetIDsOfNames(IID_NULL, comNames, 1, LOCALE_USER_DEFAULT, methodIds);
+  freeSysStrings(comNames, 1);
+
+  if(FAILED(hr)) {
+    return(ScalarLogical(R_NaInt));
+    /*
+       char errBuf[1000];
+	 FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, hr,
+		       MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), 
+		       errBuf, sizeof(errBuf)/sizeof(errBuf[0]), NULL);
+	 PROBLEM "failed to find ID of %s  (%ld) %s", CHAR(STRING_ELT(propName, 0)), hr, errBuf
+	 ERROR;
+    */
+  }
+
+  return(ScalarInteger(methodIds[0]));
+}
+
 /*
   Given a COMIDispatch object and a function/property name,
   see if it is propertyget and not a propertyput method.
   If so, then it is readonly and we don't want obj[[ propName ]] <- to assign
   as it will give an error.
  */
-extern "C" SEXP
-R_isReadOnly(SEXP obj, SEXP propName)
+extern "C"
+SEXP
+R_isReadOnly(SEXP obj, SEXP propId)
 {
   int readOnly = 0;
-  HRESULT hr = S_OK;
+  //  HRESULT hr = S_OK;
   IDispatch *disp = (IDispatch *) getRDCOMReference(obj);
   ITypeInfo *type = NULL;
 
   UINT ninfo = 0;
   disp->GetTypeInfoCount(&ninfo);
+  disp->GetTypeInfo(0, 0, &type); // 0 is for locale. Set properly in SWinTypesLib
 
-
-   disp->GetTypeInfo(0, 0, &type); // 0 is for locale. Set properly in SWinTypesLib
-
-   if(type) {
+  if(type) {
      FUNCDESC *desc = NULL;
-
-     DISPID methodIds[1];
-     BSTR comNames[1];
-     comNames[0] = AsBstr(CHAR(STRING_ELT(propName, 0)));
      
-     hr = disp->GetIDsOfNames(IID_NULL, comNames, 1, LOCALE_USER_DEFAULT, methodIds);
-     freeSysStrings(comNames, 1);
-
-     if(hr != S_OK) {
-       PROBLEM "failed"
-	 ERROR;
-     }
-     
-     
-     type->GetFuncDesc(methodIds[0], &desc);
+     type->GetFuncDesc(INTEGER(propId)[0], &desc); //XXX do we need this to be a NUMERIC for very large IDs.
      if(desc) {
        errorLog("FUNCDESC %d\n", desc->invkind);
        readOnly = (desc->invkind == INVOKE_PROPERTYGET);

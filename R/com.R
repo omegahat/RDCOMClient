@@ -142,7 +142,15 @@ setMethod("[[<-", c("COMIDispatch", "character", "missing"),
 		     tmp = tmp[[ id ]]
 		       .Call("R_setProperty", tmp, as.character(i[length(i)]), list(value), integer(0), PACKAGE = "RDCOMClient")
 	    } else {
-                 if(!.Call("R_isReadOnly", x, as.character(i), PACKAGE = "RDCOMClient"))
+
+	    id = .Call("R_lookupPropName", x, as.character(i), PACKAGE = "RDCOMClient")
+	    if(is.na(id)) {
+	      
+	       stop(structure(list(message = paste("no property ", i, " in this COM object"), call = NULL),
+	             class = c("InvalidPropertyName", "DCOMError", "error", "condition")))
+            }
+            if(!.Call("R_isReadOnly", x, id, PACKAGE = "RDCOMClient"))
+	       #XXX  pass the id now that we have found it.
                     .Call("R_setProperty", x, as.character(i), list(value), integer(0), PACKAGE = "RDCOMClient")
        }
 	      x 
