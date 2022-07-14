@@ -7,13 +7,24 @@
 
 //extern "C"
 int RDCOM_WriteErrors = 0;
+static FILE *f = NULL;
 
 extern "C"
 SEXP
 RDCOM_setWriteError(SEXP value)
 {
-    int tmp = RDCOM_WriteErrors;
+  int tmp = RDCOM_WriteErrors;  
+  if(TYPEOF(value) == STRSXP) {
+    if(f)
+      fclose(f);
+    
+    f = fopen(CHAR(STRING_ELT(value, 0)), "a");
+    RDCOM_WriteErrors = 1;
+    
+  } else {
     RDCOM_WriteErrors = asLogical(value);
+  }
+
     return(ScalarLogical(tmp));
 }
 
@@ -27,12 +38,11 @@ RDCOM_getWriteError(SEXP value)
 FILE *
 getErrorFILE()
 {
-  static FILE *f = NULL;
   if(!f) {
-    f = fopen("C:\\RDCOM.err", "a");
-    if(!f) {
-      f = fopen("C:\\RDCOM_server.err", "a");
-    }
+    f = fopen("%TMP%\\RDCOM.err", "a");
+    //    if(!f) {
+    //      f = fopen("C:\\RDCOM_server.err", "a");
+    //    }
   }
   return(f);
 }

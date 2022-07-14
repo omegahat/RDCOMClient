@@ -11,8 +11,10 @@ function(msg, status, class = "COMError")
 writeErrors =
 function(val = logical())
 {
-    if(length(val))
-        .Call("RDCOM_setWriteError", as.logical(val), PACKAGE = "RDCOMClient")
-    else
+    if(length(val)) {
+         if(!is.character(val))
+	    val = as.logical(val)
+        .Call("RDCOM_setWriteError", val, PACKAGE = "RDCOMClient")
+    } else
         .Call("RDCOM_getWriteError", PACKAGE = "RDCOMClient")
 }
