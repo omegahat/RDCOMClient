@@ -3,3 +3,5 @@
 .git/.*
 .*.o$
 .*~$
+Makefile.gcc
+LICENSE
