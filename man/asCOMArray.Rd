@@ -39,7 +39,7 @@ asCOMArray(obj)
 
 \seealso{
  \code{\link{.COM}}
- \code{\link[RDCOMServer]{createCOMObject}}
+ \code{createCOMObject} in RDCOMServer
 }
 \examples{
 \dontrun{

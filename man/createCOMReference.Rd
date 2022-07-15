@@ -9,7 +9,7 @@ for it. It can use the generic \code{IUnknown} or \code{COMIDispatch}
 classes to simply represent the pointer value.
 Alternatively, it might dynamically generate a new S class
 and accessor methods for accessing properties and functions for
-that object using the \code{\link[SWinTypeLibs]{SWinTypeLibs}}
+that object using the \code{SWinTypeLibs}
 package. Or it might lookup a previously compiled collection
 of type information and match the GUID of the object's type 
 to find the associated S class name.
@@ -42,8 +42,6 @@ createCOMReference(ref, className)
  \code{\link{COMCreate}}
  \code{\link{.COM}}
 }
-\examples{
-
-}
+%\examples{}
 \keyword{interface}
 

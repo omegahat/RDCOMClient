@@ -43,7 +43,5 @@ No methods defined with class "VARIANT" in the signature.
  \code{\link{.COM}}
 }
 
-\examples{
-
-}
+%\examples{}
 \keyword{classes}

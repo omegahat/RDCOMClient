@@ -1,8 +1,17 @@
 \name{COMTypedList-class}
+\alias{COMTypedParameterizedNamedList-class}
 \docType{class}
 \alias{COMTypedList-class}
 \alias{COMTypedNamedList-class}
 \alias{[[,COMTypedList,ANY-method}
+\alias{[,COMTypedNamedList,character-method}
+\alias{[,COMTypedNamedList,numeric-method}
+\alias{[[,COMTypedList,character-method}
+\alias{[[,COMTypedList,numeric-method}
+\alias{[[,COMTypedNamedList,character-method}
+\alias{names,COMTypedNamedList-method}
+
+\alias{names,COMTypedParameterizedNamedList-method}
 
 \title{Classes for representing DCOM objects that have list-like facilities}
 \description{
@@ -98,7 +107,5 @@ Class \code{"IUnknown"}, by class \code{"COMList"}.
  \code{\link{COMList-class}}
  \code{\link{.COM}}
 }
-\examples{
-
-}
+%\examples{}
 \keyword{classes}

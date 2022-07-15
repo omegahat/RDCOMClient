@@ -1,6 +1,9 @@
 \name{COMList}
 \alias{COMList}
+\alias{[,COMList,numeric-method}
+\alias{[[<-,COMList,numeric,ANY-method}
 \title{Create an instance of COMList class}
+
 \description{
   This is a function that creates an instance
   of a \code{\link{COMList-class}} class
@@ -36,7 +39,5 @@ COMList(obj, class = "COMList")
 \seealso{
  \code{\link{.COM}}
 }
-\examples{
-
-}
+%\examples{}
 \keyword{interface}

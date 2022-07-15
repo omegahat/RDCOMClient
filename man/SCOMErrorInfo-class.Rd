@@ -21,7 +21,7 @@ Created in the C++ code when a COM call fails.
   \describe{
     \item{\code{status}:}{Object of class \code{"numeric"} the error status for the error.
      This can be used with system codes to find the symbolic name.
-     See \code{.COMErrors} in the \code{\link[RDCOMServer]{}} package.}
+     See \code{.COMErrors} in the \code{RDCOMServer} package.}
     \item{\code{source}:}{Object of class \code{"character"} a string giving the source of the error, e.g. the application name. }
     \item{\code{description}:}{Object of class \code{"character"} the human-readable description of the error.}
   }
@@ -42,6 +42,5 @@ No methods defined with class "SCOMErrorInfo" in the signature.
  \code{\link{.COM}}
 }
 
-\examples{
-}
+%\examples{}
 \keyword{classes}

@@ -51,6 +51,5 @@ No methods defined with class "COMDate" in the signature.
   \code{\link{.COM}}
 }
 
-\examples{
-}
+%\examples{}
 \keyword{classes}

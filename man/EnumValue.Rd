@@ -37,8 +37,7 @@ EnumValue(id, value, obj = new("EnumValue"))
  \code{\link{EnumValue-class}}
  \code{\link[methods]{setAs}}
 }
-\examples{
-}
+%\examples{}
 \keyword{programming}
 \keyword{interface}
 

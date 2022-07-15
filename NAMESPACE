@@ -1,4 +1,5 @@
 import(methods)
+useDynLib(RDCOMClient)
 
 exportClasses(COMIDispatch, IUnknown, COMList, COMTypedList)
 exportClasses(CompiledCOMIDispatch, COMTypedNamedList, COMTypedParameterizedNamedList, CompiledCOMCoClass) 
@@ -35,3 +36,5 @@ export(isValidCOMObject)
 
 
 export(writeErrors)
+
+export(DispatchMethods)

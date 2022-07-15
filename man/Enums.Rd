@@ -13,12 +13,9 @@ to treat the call
 as a property accessor, method call
 or both.
 }
-\usage{data(DispatchMethods)}
-\format{
-
-}
-\source{
-}
+%\usage{data(DispatchMethods)}
+%\format{}
+%\source{}
 \references{
 \url{http://www.omegahat.net/RDCOMClient}
 \url{http://www.omegahat.net/RDCOMServer}
@@ -26,9 +23,5 @@ or both.
 \url{http://www.omegahat.net/SWinRegistry}
 }
 
-\examples{
-\dontrun{
-
-}
-}
+%\examples{\dontrun{}}
 \keyword{datasets}

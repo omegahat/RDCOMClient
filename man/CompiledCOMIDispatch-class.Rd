@@ -1,9 +1,21 @@
 \name{CompiledCOMIDispatch-class}
+\alias{CompiledCOMCoClass-class}
 \docType{class}
 \alias{CompiledCOMIDispatch-class}
 \alias{$,CompiledCOMIDispatch-method}
 \alias{$<-,CompiledCOMIDispatch,character-method}
+\alias{[[,CompiledCOMIDispatch,character,ANY-method}
 \alias{[[,CompiledCOMIDispatch,character-method}
+\alias{[[<-,CompiledCOMIDispatch,character,ANY-method}
+
+\alias{[[,CompiledCOMCoClass,character-method}
+\alias{$,CompiledCOMCoClass-method}
+\alias{$<-,CompiledCOMCoClass,character-method}
+\alias{[[<-,CompiledCOMCoClass,character,ANY-method}
+\alias{[[<-,CompiledCOMCoIDispatch,character,ANY-method}
+
+\alias{names,CompiledCOMIDispatch-method}
+\alias{names,CompiledCOMCoIDispatch-method}
 
 \title{DCOM Interface object with knowledge of its methods and their types.}
 \description{
@@ -63,7 +75,5 @@ Class \code{"IUnknown"}, by class \code{"COMIDispatch"}.
  \code{\link[SWinTypeLibs]{generateInterface}}
  \code{\link[SWinTypeLibs]{writeCode}}
 }
-\examples{
-
-}
+%\examples{}
 \keyword{classes}

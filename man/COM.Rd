@@ -10,7 +10,7 @@
   is returned. 
 }
 \usage{
-.COM(obj, name, ..., .dispatch = as.integer(3), .return = TRUE, 
+.COM(obj, name, ..., .dispatch = 3L, .return = TRUE, 
       .ids = numeric(0), .suppliedArgs)
 }
 \arguments{

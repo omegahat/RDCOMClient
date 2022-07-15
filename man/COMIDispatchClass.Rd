@@ -4,7 +4,14 @@
 \alias{IUnknown-class}
 \alias{$<-,COMIDispatch,ANY-method}
 \alias{[[<-,COMIDispatch,character-method}
+\alias{[[<-,COMIDispatch,character,character-method}
+\alias{[[<-,COMIDispatch,character,missing-method}
 \alias{[[<-,COMIDispatch,numeric-method}
+\alias{[[<-,COMIDispatch,numeric,ANY-method}
+\alias{sapply,COMIDispatch-method}
+\alias{lapply,COMIDispatch-method}
+
+
 \title{Representation of generic COM object in R}
 \description{ 
  These classes are used to represent in S an arbitrary
@@ -76,7 +83,5 @@ COM method  call.
 \seealso{
  \code{\link{COMCreate}}
 }
-\examples{
-
-}
+%\examples{}
 \keyword{classes}

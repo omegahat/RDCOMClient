@@ -37,7 +37,7 @@ getCLSID(appName)
 \author{Duncan Temple Lang (duncan@r-project.org)}
 
 \seealso{
-
+SWinRegistry package
 }
 \examples{
   getCLSID("Excel.Application")
