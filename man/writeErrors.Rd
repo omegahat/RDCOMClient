@@ -3,8 +3,9 @@
 \title{Query or set whether DCOM errors are written to a file}
 \description{
  This function allows one to query or set the flag that controls
-whether DCOM errors are appended to a file (c:/DCOM.err) when
-they are encountered.  
+whether DCOM errors are appended to a file they are encountered.
+It now allows one to specify the path to the file to which these
+messages are written.
 }
 \usage{
 writeErrors(val = logical())
