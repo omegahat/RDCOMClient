@@ -23,6 +23,8 @@ RDCOM_setWriteError(SEXP value)
     
   } else {
     RDCOM_WriteErrors = asLogical(value);
+    if(f)
+      fflush(f);
   }
 
     return(ScalarLogical(tmp));
@@ -39,7 +41,7 @@ FILE *
 getErrorFILE()
 {
   if(!f) {
-    f = fopen("%TMP%\\RDCOM.err", "a");
+    //    f = fopen("%TMP%\\RDCOM.err", "a");
     //    if(!f) {
     //      f = fopen("C:\\RDCOM_server.err", "a");
     //    }

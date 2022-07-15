@@ -1,3 +1,4 @@
+if(FALSE) {
 library(RDCOMClient)
 e <- COMCreate("Excel.Application")
 books <- e[["workbooks"]] 
@@ -25,3 +26,4 @@ v <- r$Item(as.integer(1), as.integer(1))
 v[["Interior"]][["ColorIndex"]] = 3
 
 e$Quit()
+}
