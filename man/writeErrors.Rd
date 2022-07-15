@@ -10,24 +10,24 @@ they are encountered.
 writeErrors(val = logical())
 }
 \arguments{
-\item{val}{a logical value.  If this is not specified, the function
+\item{val}{the full path to a file name  in which to log messages.
+  This does may exist in which case messages will be apppended.
+  If it doesn't exist, it will be created.
+  If no value is specified, the function
  queries the current logical value controlling whether DCOM errors are 
- written to a file.  If this is a logical value (not an empty vector),
- that value of the first element is used to set whether the DCOM errors
- are written to a file or not.}
+ written to a file.  }
 }
 \value{
  A logical value (i.e. vector of length 1)
- indicating the value of the flag before the function
+ indicating the value of the boolean flag before the function
   was called. In other words, if we are setting the value,
   we get back the previous value.
 }
 \author{Duncan Temple Lang}
 \examples{
   old = writeErrors()
-  writeErrors(FALSE)
+  writeErrors("DCOM.log")
   writeErrors()
-  writeErrors(old)
 }
 \keyword{IO}
 \keyword{programming}

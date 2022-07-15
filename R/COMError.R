@@ -14,6 +14,8 @@ function(val = logical())
     if(length(val)) {
          if(!is.character(val))
 	    val = as.logical(val)
+         else
+	     val = path.expand(val)
         .Call("RDCOM_setWriteError", val, PACKAGE = "RDCOMClient")
     } else
         .Call("RDCOM_getWriteError", PACKAGE = "RDCOMClient")
