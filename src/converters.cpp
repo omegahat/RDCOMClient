@@ -571,7 +571,7 @@ createRDCOMArray(SEXP obj, VARIANT *var)
 
   HRESULT hr = SafeArrayAccessData(arr, (void**) &data);
   if(hr != S_OK) {
-    std::cerr <<"Problems accessing data" << std::endl;
+    errorLog("Problems accessing data");
     SafeArrayDestroy(arr);
     return(NULL);
   }
@@ -600,7 +600,9 @@ createRDCOMArray(SEXP obj, VARIANT *var)
       break;
 
     default:
-      std::cerr <<"Array case not handled yet for R type " << TYPEOF(obj) << std::endl;
+      PROBLEM "Array case not handled yet for R type %d", TYPEOF(obj)
+      WARN;
+      
     break;
   }
 
