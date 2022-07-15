@@ -5,9 +5,9 @@ Author:  Duncan Temple Lang <duncan@r-project.org>
 Maintainer: Duncan Temple Lang <duncan@r-project.org>
 Contributions: Jo Totland (https://github.com/jototland)
 Description: Provides dynamic client-side access to (D)COM applications from within R.
-License: GPL2
+License: GPL-2
 LazyLoad: yes
 Imports: methods
 Collate: classes.R COMLists.S  COMError.R com.R debug.S zzz.R runTime.S
-URL:  http://www.omegahat.net/RDCOMClient,  http://www.omegahat.net
-      http://www.omegahat.net/bugs
+URL:  https://github.com/omegahat/RDCOMClient
+     http://www.omegahat.net/RDCOMClient,  http://www.omegahat.net
