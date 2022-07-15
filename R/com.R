@@ -69,7 +69,7 @@ function(guid, force = TRUE, silent = FALSE)
     if(!force) {
       if(silent)
         return(ans)
-      els
+      else
         stop(ans)
     } else {
        if(!silent)
@@ -164,7 +164,7 @@ setMethod("[[<-", c("COMIDispatch", "numeric"),
 .COM <-
  # Allows one to control the type of dispatch used in the COM Invoke() call.
  # Useful for getting properties and methods.
-function(obj, name,  ..., .dispatch = as.integer(3), .return = TRUE, .ids=numeric(0),
+function(obj, name,  ..., .dispatch = 3L, .return = TRUE, .ids=numeric(0),
            .suppliedArgs)
 {
  # if(!missing(.ids)) { }
@@ -207,7 +207,7 @@ function(obj)
   if(!is(obj, "COMIDispatch"))
     return(FALSE)
 
-  if(!.Call("R_isValidCOMObject", obj))
+  if(!.Call("R_isValidCOMObject", obj, PACKAGE = "RDCOMClient"))
     return(FALSE)
 
    # Now run the .COM(obj, "isValidObject") 

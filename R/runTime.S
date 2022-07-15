@@ -62,7 +62,8 @@ setMethod("$", "CompiledCOMIDispatch",
 
                # Do partial or complete matching depending on the value of 
                # a variable the user can set named StrictMethodNameExpansion.
-             if(!exists("StrictMethodNameExpansion") || StrictMethodNameExpansion) 
+             if(getOption("DCOM.StrictMethodNameExpansion", FALSE))
+	              #!exists("StrictMethodNameExpansion") || StrictMethodNameExpansion) 
                 m = match
              else
                 m = pmatch
