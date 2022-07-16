@@ -149,7 +149,7 @@ setMethod("[[<-", c("COMIDispatch", "character", "missing"),
 	       stop(structure(list(message = paste("no property ", i, " in this COM object"), call = NULL),
 	             class = c("InvalidPropertyName", "DCOMError", "error", "condition")))
             }
-            if(!.Call("R_isReadOnly", x, id, PACKAGE = "RDCOMClient"))
+            #XXX if(!.Call("R_isReadOnly", x, id, PACKAGE = "RDCOMClient"))
                .Call("R_setProperty", x, as.character(i), list(value), id, PACKAGE = "RDCOMClient")
        }
 	      x 

@@ -1,0 +1,6 @@
+
+0.96-1
+
++ Removed the check in [[<- to see if the property is read-only. Have to handle case where there are two property elements in the type library with the same name (e.g., Visible) with a PROPERTYGET and PROPERTYPUT.
+   + For now, we try to set the property and don't signal an error if it fails.
+

@@ -406,7 +406,9 @@ R_COM_Invoke(SEXP obj, SEXP methodName, SEXP args, WORD callType, WORD doReturn,
 #endif
 
  hr = disp->Invoke(methodIds[0], IID_NULL, LOCALE_USER_DEFAULT, callType, &params, res, &exceptionInfo, &nargErr);
- if(FAILED(hr)) {
+
+
+ if(FAILED(hr) && callType != DISPATCH_PROPERTYPUT) {
    
      if(hr == DISP_E_MEMBERNOTFOUND) {
        errorLog("Error because member not found %d\n", nargErr);
