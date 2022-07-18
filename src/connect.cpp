@@ -200,8 +200,12 @@ R_create(SEXP className)
 
   if(FAILED(sc)) {
    TCHAR buf[512];
+   char errBuf[10000];
    GetScodeString(sc, buf, sizeof(buf)/sizeof(buf[0]));
-   PROBLEM "Failed to create COM object: %s", buf
+   FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, sc, // GetLastError(), 
+		  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), 
+		  errBuf, sizeof(errBuf)/sizeof(errBuf[0]), NULL);
+   PROBLEM "Failed to create COM object: %s, %s", buf, errBuf
    ERROR;
   }
 
